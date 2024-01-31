@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ColumnProps } from '@/type/index'
+import type { ColumnProps } from '@/type/global'
 import { onMounted, type PropType } from 'vue'
 
 defineOptions({
@@ -49,3 +49,4 @@ onMounted(() => {
     </div>
   </div>
 </template>
+@/types/index

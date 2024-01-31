@@ -76,3 +76,4 @@ defineProps({
     </ul>
   </nav>
 </template>
+@/types

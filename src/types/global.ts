@@ -1,9 +1,3 @@
-export interface ResponseType<P = {}> {
-  code: number
-  msg: string
-  data: P
-}
-
 // 用户
 export interface UserProps {
   isLogin: boolean
@@ -20,12 +14,6 @@ export interface ImageProps {
   createdAt?: string
   fitUrl?: string
 }
-
-export interface RuleProp {
-  type: 'required' | 'email'
-  message: string
-}
-export type RulesProp = RuleProp[]
 
 // 列表
 export interface ColumnProps {

@@ -60,3 +60,4 @@ const validateEmail = () => {
     </span>
   </div>
 </template>
+@/types

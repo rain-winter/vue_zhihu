@@ -1,4 +1,4 @@
-import type { ColumnProps, PostProps } from '@/type'
+import type { ColumnProps, PostProps } from '@/types'
 
 export const testData: ColumnProps[] = [
   {
