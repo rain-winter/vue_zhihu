@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import type { RulesProp } from '@/type'
-import { reactive, type PropType } from 'vue'
+import type { RulesProp } from '@/types/common'
+import mitt from 'mitt'
+import { onMounted, reactive, useAttrs, type PropType } from 'vue'
+const emitter = mitt()
+
+const attrs = useAttrs()
 
 defineOptions({
-  name: 'ValidateInput'
+  name: 'ValidateInput',
+  inheritAttrs: false
 })
 
 const props = defineProps({
@@ -12,25 +17,30 @@ const props = defineProps({
   }
 })
 
+onMounted(() => {
+  emitter.emit('on-input-mounted', () => console.log(123))
+})
+
+const emailVal = defineModel('emailVal', { type: String, default: '' })
+
 const emailReg = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
 const inputRef = reactive({
-  value: '',
   error: false,
   message: ''
 })
 
-const validateEmail = () => {
-  if (!props.rules) return
+const validateInput = () => {
+  if (!props.rules) return true
   const allPassed = props.rules.every((rule) => {
     let passed = true
     inputRef.message = rule.message
     switch (rule.type) {
       case 'required':
-        passed = inputRef.value.trim() !== ''
+        passed = emailVal.value.trim() !== ''
         break
       case 'email':
-        passed = emailReg.test(inputRef.value)
+        passed = emailReg.test(emailVal.value)
         break
       default:
         break
@@ -38,7 +48,12 @@ const validateEmail = () => {
     return passed
   })
   inputRef.error = !allPassed
+  return allPassed
 }
+
+defineExpose({
+  validateInput
+})
 </script>
 
 <template>
@@ -49,8 +64,9 @@ const validateEmail = () => {
       :class="{
         'is-invalid': inputRef.error
       }"
-      @blur="validateEmail"
-      v-model="inputRef.value"
+      @blur="validateInput"
+      v-model="emailVal"
+      v-bind="attrs"
     />
     <span
       v-if="inputRef.error"
@@ -60,4 +76,3 @@ const validateEmail = () => {
     </span>
   </div>
 </template>
-@/types
