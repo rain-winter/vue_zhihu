@@ -1,17 +1,25 @@
 <script setup lang="ts">
-// import mitt from 'mitt'
+import type { ValidateFunc } from '@/types/common'
+import { emitter } from '@/utils'
 import { onUnmounted } from 'vue'
-// const emitter = mitt()
+
 const emits = defineEmits(['submitForm'])
 
-onUnmounted(() => {})
+onUnmounted(() => {
+  emitter.off('form-item-created', callback)
+  funcArr = []
+})
 
-const fn = () => {}
-const submitForm = () => {
-  emits('submitForm')
+const callback = (func?: ValidateFunc) => {
+  if (func) funcArr.push(func)
 }
+emitter.on('form-item-created', callback)
 
-defineExpose({})
+let funcArr: ValidateFunc[] = []
+const submitForm = () => {
+  const result = funcArr.map((func) => func()).every((res) => res)
+  emits('submitForm', result)
+}
 </script>
 <template>
   <form class="validate-form-container">

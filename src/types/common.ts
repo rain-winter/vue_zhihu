@@ -9,3 +9,11 @@ export interface RuleProp {
   message: string
 }
 export type RulesProp = RuleProp[]
+
+export type ValidateFunc = () => boolean
+
+export type Events = {
+  foo?: string
+  bar?: number
+  'form-item-created': any
+}

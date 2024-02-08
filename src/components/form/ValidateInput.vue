@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { RulesProp } from '@/types/common'
-import mitt from 'mitt'
+import { emitter } from '@/utils'
+
 import { onMounted, reactive, useAttrs, type PropType } from 'vue'
-const emitter = mitt()
 
 const attrs = useAttrs()
 
@@ -18,7 +18,7 @@ const props = defineProps({
 })
 
 onMounted(() => {
-  emitter.emit('on-input-mounted', () => console.log(123))
+  emitter.emit('form-item-created', validateInput)
 })
 
 const emailVal = defineModel('emailVal', { type: String, default: '' })
