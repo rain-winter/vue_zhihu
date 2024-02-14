@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import { login } from '@/api/methods/users'
 import ValidateForm from '@/components/form/ValidateForm.vue'
 import ValidateInput from '@/components/form/ValidateInput.vue'
 import type { RulesProp } from '@/types/common'
+import { useRequest } from 'alova'
 import { ref } from 'vue'
 
 defineOptions({ name: 'LoginView' })
 
-const inputRef = ref()
-const emailVal = ref('')
+const inputRef = ref('')
+const emailVal = ref('3100406687@qq.com')
 const emailRules: RulesProp = [
   { type: 'required', message: '电子邮箱地址不能为空' },
   { type: 'email', message: '请输入正确的电子邮箱格式' }
@@ -15,9 +17,19 @@ const emailRules: RulesProp = [
 const passwordVal = ref('')
 const passwordRules: RulesProp = [{ type: 'required', message: '密码不能为空' }]
 
-const onSubmitForm = () => {
+const onSubmitForm = (result: boolean) => {
   //   console.log(123)
-  console.log(inputRef.value.validateInput())
+  // console.log(inputRef.value.validateInput())
+  console.log(result)
+  if (!result) return
+  const payload = {
+    email: emailVal.value,
+    password: passwordVal.value
+  }
+  const { data: user, onSuccess } = useRequest(login(payload))
+  onSuccess(({ data }) => {
+    console.log(data[0])
+  })
 }
 </script>
 <template>

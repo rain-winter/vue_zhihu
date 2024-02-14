@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UserProps } from '@/types/common'
+import type { UserProps } from '@/types/user'
 import type { PropType } from 'vue'
 import DropDown from './DropDown.vue'
 import DropdownItem from './DropdownItem.vue'

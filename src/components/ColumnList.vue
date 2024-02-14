@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ColumnProps } from '@/type/global'
+import type { ColumnProps } from '@/types/column'
 import { onMounted, type PropType } from 'vue'
 
 defineOptions({
