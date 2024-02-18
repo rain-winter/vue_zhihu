@@ -26,9 +26,10 @@ const onSubmitForm = (result: boolean) => {
     email: emailVal.value,
     password: passwordVal.value
   }
-  const { data: user, onSuccess } = useRequest(login(payload))
+  const { onSuccess } = useRequest(login(payload))
+
   onSuccess(({ data }) => {
-    console.log(data[0])
+    localStorage.setItem('user', JSON.stringify(data[0]))
   })
 }
 </script>

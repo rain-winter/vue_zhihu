@@ -17,3 +17,5 @@ export interface GlobalDataProps {
   posts: { data: ListProps<PostProps>; loadedColumns: string[] }
   user: UserProps
 }
+
+export type MessageType = 'success' | 'error' | 'primary'

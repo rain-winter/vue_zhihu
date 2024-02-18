@@ -9,12 +9,18 @@ const beforeRequest = (method: Method) => {
   // method.config.headers.common.Authorization = ''
   const globalStore = useGlobalStore()
   globalStore.isLoading = true
+  globalStore.error = {
+    status: false,
+    message: ''
+  }
 }
 const onSuccess = async (response: any) => {
-  console.log(response.statusText, 'response.statusText')
-
-  if (response.status >= 400) {
-    throw new Error(response.statusText)
+  if (response.status !== 200) {
+    const globalStore = useGlobalStore()
+    globalStore.error = {
+      status: true,
+      message: response.statusText
+    }
   }
   const json = await response.json()
   if (json.code !== 200) {
@@ -29,7 +35,12 @@ const onSuccess = async (response: any) => {
 // 请求错误时将会进入该拦截器。
 // 第二个参数为当前请求的method实例，你可以用它同步请求前后的配置信息
 const onError = (err: any, method: Method) => {
-  console.log(err, method, 'onError')
+  console.log(err, 'onError')
+  const globalStore = useGlobalStore()
+  globalStore.error = {
+    status: true,
+    message: 'onError'
+  }
 }
 
 const onComplete = (method: Method) => {
