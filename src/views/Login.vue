@@ -2,12 +2,14 @@
 import { login } from '@/api/methods/users'
 import ValidateForm from '@/components/form/ValidateForm.vue'
 import ValidateInput from '@/components/form/ValidateInput.vue'
+import createMessage from '@/hooks/createMessage'
 import type { RulesProp } from '@/types/common'
 import { useRequest } from 'alova'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 defineOptions({ name: 'LoginView' })
-
+const router = useRouter()
 const inputRef = ref('')
 const emailVal = ref('3100406687@qq.com')
 const emailRules: RulesProp = [
@@ -30,6 +32,8 @@ const onSubmitForm = (result: boolean) => {
 
   onSuccess(({ data }) => {
     localStorage.setItem('user', JSON.stringify(data[0]))
+    createMessage('登录成功', 'success')
+    router.push('/')
   })
 }
 </script>

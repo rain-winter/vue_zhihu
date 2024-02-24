@@ -24,7 +24,7 @@ watch(
 )
 </script>
 <template>
-  <main class="container">
+  <main class="container-fluid">
     <GlobalHeader :user="userStore.user" />
     <router-view />
     <Loader v-if="globalStore.isLoading"></Loader>

@@ -17,3 +17,11 @@ export type Events = {
   bar?: number
   'form-item-created': any
 }
+
+export type UploadStatus = 'ready' | 'loading' | 'success' | 'error'
+
+export type CheckFunction = (file: File) => boolean
+export interface CheckCondition {
+  format?: string[]
+  size?: number
+}

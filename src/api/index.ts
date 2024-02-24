@@ -68,3 +68,7 @@ export const commentsAlova = createAlova({
 export const userAlova = createAlova({
   ...BaseAlovaOption
 })
+
+export const postAlova = createAlova({
+  ...BaseAlovaOption
+})

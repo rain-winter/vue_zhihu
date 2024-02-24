@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { RulesProp } from '@/types/common'
-import { emitter } from '@/utils'
+import type { RulesProp } from '@/types/common';
+import { emitter } from '@/utils';
 
-import { onMounted, reactive, useAttrs, type PropType } from 'vue'
+import { onMounted, reactive, useAttrs, type PropType } from 'vue';
 
 const attrs = useAttrs()
 
@@ -14,6 +14,10 @@ defineOptions({
 const props = defineProps({
   rules: {
     type: Array as PropType<RulesProp>
+  },
+  tag: {
+    type: String,
+    default: 'input'
   }
 })
 
@@ -59,7 +63,17 @@ defineExpose({
 <template>
   <div class="validate-input-container pb-3">
     <input
-      type="text"
+      v-if="tag !== 'textarea'"
+      class="form-control"
+      :class="{
+        'is-invalid': inputRef.error
+      }"
+      @blur="validateInput"
+      v-model="emailVal"
+      v-bind="attrs"
+    />
+    <textarea
+      v-else
       class="form-control"
       :class="{
         'is-invalid': inputRef.error

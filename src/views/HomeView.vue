@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import ColumnList from '@/components/ColumnList.vue'
-import { testData } from '@/utils/testData'
+import ColumnList from '@/components/ColumnList.vue';
+import { testData } from '@/utils/testData';
+
+
 </script>
 
 <template>

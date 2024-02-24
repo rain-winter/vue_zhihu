@@ -47,7 +47,7 @@ defineProps({
       v-else
       class="list-inline mb-0"
     >
-      <DropDown :title="'你好啊'">
+      <DropDown :title="user.nickName || '请登录'">
         <DropdownItem>
           <router-link
             to="/create"

@@ -18,4 +18,4 @@ export interface GlobalDataProps {
   user: UserProps
 }
 
-export type MessageType = 'success' | 'error' | 'primary'
+export type MessageType = 'success' | 'danger' | 'primary' | 'secondary' | 'warning' | 'info'

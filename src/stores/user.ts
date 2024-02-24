@@ -1,3 +1,4 @@
+import type { UserProps } from '@/types/user'
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 
@@ -5,7 +6,7 @@ import { reactive } from 'vue'
 // 第一个参数是你的应用中 Store 的唯一 ID。
 export const useUserStore = defineStore('user', () => {
   const localUser = localStorage.getItem('user')
-  const user = reactive({
+  const user = reactive<UserProps>({
     isLogin: localUser ? true : false,
     ...JSON.parse(localUser || '{}')
   })
