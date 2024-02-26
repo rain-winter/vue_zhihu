@@ -23,13 +23,13 @@ const onSuccess = async (response: any) => {
     }
   }
   const json = await response.json()
-  if (json.code !== 200) {
-    // 抛出错误或返回reject状态的Promise实例时，此请求将抛出错误
-    throw new Error(json.message)
-  }
+  // if (json.code !== 200) {
+  //   // 抛出错误或返回reject状态的Promise实例时，此请求将抛出错误
+  //   throw new Error(json.message)
+  // }
 
   // 解析的响应数据将传给method实例的transformData钩子函数，这些函数将在后续讲解
-  return json.data
+  return json
 }
 
 // 请求错误时将会进入该拦截器。

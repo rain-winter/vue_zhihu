@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { UserProps } from '@/types/user'
-import type { PropType } from 'vue'
-import DropDown from './DropDown.vue'
-import DropdownItem from './DropdownItem.vue'
+import type { UserProps } from '@/types/user';
+import type { PropType } from 'vue';
+import DropDown from './DropDown.vue';
+import DropdownItem from './DropdownItem.vue';
 
 defineOptions({
   name: 'GlobalHeader'
@@ -54,6 +54,14 @@ defineProps({
             class="dropdown-item"
           >
             新建文章
+          </router-link>
+        </DropdownItem>
+        <DropdownItem v-if="user.column">
+          <router-link
+            :to="`/column/${user.column }`"
+            class="dropdown-item"
+          >
+            我的专栏
           </router-link>
         </DropdownItem>
         <DropdownItem disabled>
